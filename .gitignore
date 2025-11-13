@@ -1,0 +1,5 @@
+# Ignore External Libraries
+.idea/libraries/
+
+# Ignore Scratches and Consoles
+.idea/scratches/

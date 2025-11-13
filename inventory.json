@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "type": "Auto",
+    "name": "Bmw",
+    "date_added": "2024-12-08",
+    "date_removed": "",
+    "notes": "crashed"
+  },
+  {
+    "id": 2,
+    "type": "Smart-Phone",
+    "name": "S24",
+    "date_added": "2024-12-30",
+    "date_removed": "",
+    "notes": "fixed"
+  },
+  {
+    "id": 3,
+    "type": "Grafikkarte",
+    "name": "NVidia",
+    "date_added": "2025-01-10",
+    "date_removed": "",
+    "notes": "4060"
+  },
+  {
+    "id": 4,
+    "type": "Router2",
+    "name": "Fritz-Box5000",
+    "date_added": "2025-01-12",
+    "date_removed": "2025-01-12",
+    "notes": "new"
+  }
+]
