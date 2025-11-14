@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventarverwaltung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    button {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Inventarverwaltung</h1>
+<button onclick="loadInventory()">Inventar laden</button>
+
+<table id="inventoryTable">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Typ</th>
+    <th>Name</th>
+    <th>Hinzugefügt am</th>
+    <th>Notizen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Daten werden hier dynamisch eingefügt -->
+  </tbody>
+</table>
+
+<script>
+  async function loadInventory() {
+    try {
+      const response = await fetch('http://localhost:8080/inventory');
+      if (!response.ok) {
+        throw new Error('Fehler beim Laden der Daten');
+      }
+      const data = await response.json();
+
+      const tbody = document.querySelector('#inventoryTable tbody');
+      tbody.innerHTML = '';
+
+      data.forEach(item => {
+        const row = `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.type}</td>
+                            <td>${item.name}</td>
+                            <td>${item.date_added}</td>
+                            <td>${item.notes}</td>
+                        </tr>`;
+        tbody.innerHTML += row;
+      });
+    } catch (error) {
+      console.error('Fehler:', error);
+      alert('Inventar konnte nicht geladen werden.');
+    }
+  }
+</script>
+
+</body>
+</html>

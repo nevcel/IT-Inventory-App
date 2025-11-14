@@ -29,6 +29,8 @@ func StartServer() {
 	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RemoveItem).Methods("DELETE")
 
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./web/")))
+
 	http.ListenAndServe(":8080", r)
 }
 
