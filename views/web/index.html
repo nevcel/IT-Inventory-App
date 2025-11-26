@@ -5,87 +5,468 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventarverwaltung</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+      padding-bottom: 80px;
     }
 
-    table {
-      border-collapse: collapse;
+    .header {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .search-bar {
+      background: white;
+      padding: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .search-input {
       width: 100%;
-      margin-top: 10px;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #f8f8f8;
     }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
+    .inventory-list {
+      background: white;
+      margin: 10px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    th {
-      background-color: #f4f4f4;
-    }
-
-    button {
-      margin-bottom: 10px;
-      padding: 8px 12px;
+    .inventory-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #f0f0f0;
       cursor: pointer;
+      transition: background 0.2s;
     }
 
-    tr:hover {
-      background-color: #f9f9f9;
+    .inventory-item:last-child {
+      border-bottom: none;
+    }
+
+    .inventory-item:hover {
+      background: #f8f8f8;
+    }
+
+    .item-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .item-details {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .item-arrow {
+      color: #ccc;
+      font-size: 20px;
+      margin-left: 10px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #00bfa5;
+      color: white;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,191,165,0.4);
+      transition: transform 0.2s;
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #888;
+      font-size: 11px;
+      cursor: pointer;
+      padding: 5px 20px;
+    }
+
+    .nav-item.active {
+      color: #00bfa5;
+    }
+
+    .nav-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s;
+    }
+
+    .modal-header {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .detail-row {
+      margin-bottom: 15px;
+    }
+
+    .detail-label {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      color: #333;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 15px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+<div class="header">
+  <h1>Inventarverwaltung</h1>
+</div>
 
-<h1>Inventarverwaltung</h1>
-<button onclick="loadInventory()">Inventar laden</button>
+<div class="search-bar">
+  <input type="text" class="search-input" id="searchInput" placeholder="Suche...">
+</div>
 
-<table id="inventoryTable">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Typ</th>
-    <th>Name</th>
-    <th>Hinzugefügt am</th>
-    <th>Notizen</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- Daten werden hier dynamisch eingefügt -->
-  </tbody>
-</table>
+<div id="errorContainer"></div>
+
+<div class="inventory-list" id="inventoryList">
+  <div class="loading">Lade Inventar...</div>
+</div>
+
+<button class="fab" onclick="loadInventory()" title="Inventar neu laden">↻</button>
+<div class="bottom-nav">
+  <div class="nav-item active">
+    <div class="nav-icon">🏠</div>
+    <div>Home</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">📋</div>
+    <div>Listen</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">📁</div>
+    <div>Inventar</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">🔍</div>
+    <div>Suche</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">⚙️</div>
+    <div>Mehr</div>
+  </div>
+</div>
+
+<!-- Modal für Item Details -->
+<div class="modal" id="detailModal">
+  <div class="modal-content">
+    <div class="modal-header">Item Details</div>
+    <div id="detailContent"></div>
+    <div class="form-buttons">
+      <button type="button" class="btn btn-secondary" id="closeDetailBtn">Schließen</button>
+    </div>
+  </div>
+</div>
 
 <script>
+  let inventory = [];
+  let allInventory = [];
+
+  // Icons für verschiedene Typen
+  const typeIcons = {
+    'air': '✈️',
+    'bürostuhl': '🪑',
+    'drucker': '🖨️',
+    'macbook': '💻',
+    'messestand': '🎪',
+    'promotion': '📦',
+    'default': '📌'
+  };
+
+  const typeColors = {
+    'air': '#4CAF50',
+    'bürostuhl': '#FFC107',
+    'drucker': '#2196F3',
+    'macbook': '#9C27B0',
+    'messestand': '#F44336',
+    'promotion': '#FF9800',
+    'default': '#607D8B'
+  };
+
+  function getIcon(type) {
+    const key = type.toLowerCase();
+    return typeIcons[key] || typeIcons.default;
+  }
+
+  function getColor(type) {
+    const key = type.toLowerCase();
+    return typeColors[key] || typeColors.default;
+  }
+
   async function loadInventory() {
     try {
+      document.getElementById('errorContainer').innerHTML = '';
+      document.getElementById('inventoryList').innerHTML = '<div class="loading">Lade Inventar...</div>';
+
       const response = await fetch('http://localhost:8080/inventory');
       if (!response.ok) {
         throw new Error('Fehler beim Laden der Daten');
       }
       const data = await response.json();
 
-      const tbody = document.querySelector('#inventoryTable tbody');
-      tbody.innerHTML = '';
+      allInventory = data;
+      inventory = data;
+      renderInventory();
 
-      data.forEach(item => {
-        const row = `
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.type}</td>
-                            <td>${item.name}</td>
-                            <td>${item.date_added}</td>
-                            <td>${item.notes}</td>
-                        </tr>`;
-        tbody.innerHTML += row;
-      });
     } catch (error) {
       console.error('Fehler:', error);
-      alert('Inventar konnte nicht geladen werden.');
+      document.getElementById('errorContainer').innerHTML =
+              `<div class="error-message">Inventar konnte nicht geladen werden: ${error.message}</div>`;
+      document.getElementById('inventoryList').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <div>Fehler beim Laden der Daten</div>
+                    </div>
+                `;
     }
   }
-</script>
 
+  function renderInventory(filter = '') {
+    const listEl = document.getElementById('inventoryList');
+
+    const filtered = allInventory.filter(item =>
+            item.name.toLowerCase().includes(filter.toLowerCase()) ||
+            item.type.toLowerCase().includes(filter.toLowerCase()) ||
+            (item.notes && item.notes.toLowerCase().includes(filter.toLowerCase()))
+    );
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <div>Keine Items gefunden</div>
+                    </div>
+                `;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(item => `
+                <div class="inventory-item" onclick="showDetail(${item.id})">
+                    <div class="item-icon" style="background: ${getColor(item.type)}20;">
+                        ${getIcon(item.type)}
+                    </div>
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-details">${item.type} • ${item.notes || 'Keine Notizen'}</div>
+                    </div>
+                    <div class="item-arrow">›</div>
+                </div>
+            `).join('');
+  }
+
+  function showDetail(id) {
+    const item = allInventory.find(i => i.id === id);
+    if (!item) return;
+
+    document.getElementById('detailContent').innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">ID</div>
+                    <div class="detail-value">${item.id}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Typ</div>
+                    <div class="detail-value">${item.type}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Name</div>
+                    <div class="detail-value">${item.name}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Hinzugefügt am</div>
+                    <div class="detail-value">${item.date_added}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Notizen</div>
+                    <div class="detail-value">${item.notes || '-'}</div>
+                </div>
+            `;
+
+    document.getElementById('detailModal').classList.add('active');
+  }
+
+  // Event Listeners
+  document.getElementById('closeDetailBtn').addEventListener('click', () => {
+    document.getElementById('detailModal').classList.remove('active');
+  });
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    renderInventory(e.target.value);
+  });
+
+  // Modal außerhalb klicken zum Schließen
+  document.getElementById('detailModal').addEventListener('click', (e) => {
+    if (e.target.id === 'detailModal') {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+  });
+
+  // Initial laden
+  loadInventory();
+</script>
 </body>
 </html>
