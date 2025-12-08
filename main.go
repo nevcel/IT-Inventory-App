@@ -1,6 +1,8 @@
 package main
 
-import "mvc-inventary/server"
+import (
+	"mvc-inventary/server"
+)
 
 func main() {
 	server.StartServer()
