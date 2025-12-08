@@ -1,0 +1,127 @@
+/* === Grundlayout === */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #edeefe;
+  color: #222;
+}
+
+.navbar {
+  background: #4a3aff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.login-btn {
+  background: white;
+  color: #4a3aff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.container {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* === Suchbereich === */
+.search-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: #4a3aff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-primary:hover {
+  background: #372ecc;
+}
+
+/* === Statistiken === */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stat-card .icon {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.violet { background: #7b68ee; }
+.green { background: #00c26f; }
+.orange { background: #ff9800; }
+
+/* === Tabelle === */
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th {
+  text-align: left;
+  background: #f5f4ff;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.inventory-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.action-btn {
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.action-btn.edit {
+  background: #e0e0ff;
+}
+.action-btn.delete {
+  background: #ffe0e0;
+}

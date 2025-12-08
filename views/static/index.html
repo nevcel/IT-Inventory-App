@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">📦 Inventory Manager</div>
+  <button class="login-btn">Login</button>
+</nav>
+
+<main class="container">
+  <div class="search-area">
+    <input type="text" id="searchInput" placeholder="Artikel suchen...">
+    <button id="addItemBtn" class="btn-primary">+ Neuer Artikel</button>
+  </div>
+
+  <section class="stats">
+    <div class="stat-card violet">
+      <div class="icon">📊</div>
+      <div>
+        <p>Gesamtartikel</p>
+        <h2 id="totalItems">0</h2>
+      </div>
+    </div>
+    <div class="stat-card green">
+      <div class="icon">📂</div>
+      <div>
+        <p>Verschiedene Types</p>
+        <h2 id="totalTypes">0</h2>
+      </div>
+    </div>
+    <div class="stat-card orange">
+      <div class="icon">🕒</div>
+      <div>
+        <p>Heute hinzugefügt</p>
+        <h2 id="todayAdded">0</h2>
+      </div>
+    </div>
+  </section>
+
+  <table class="inventory-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>date_added</th>
+      <th>date_removed</th>
+      <th>notes</th>
+    </tr>
+    </thead>
+    <tbody id="inventoryBody"></tbody>
+  </table>
+  <div id="inventoryItem"></div>
+
+
+
+
+</main>
+
+
+</body>
+</html>
