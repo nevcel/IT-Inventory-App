@@ -13,6 +13,7 @@ import (
 )
 
 var inventory *controllers.InventoryController
+var users *controllers.UserController
 
 // StartServer startet den HTTP-Server
 func StartServer() {
@@ -20,6 +21,9 @@ func StartServer() {
 		Inventory: &models.Inventory{},
 	}
 	inventory.Load()
+
+	users = &controllers.UserController{}
+	users.Load()
 
 	r := mux.NewRouter()
 
