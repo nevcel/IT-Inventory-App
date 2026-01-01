@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", loadInventory);
 // Listener for Item-Search
 document.addEventListener("DOMContentLoaded", () => {
     loadInventory();
-
+    // Item-Search bereich
     const searchInput = document.getElementById("searchInput");
     if (!searchInput) return;
 
@@ -91,4 +91,58 @@ document.addEventListener("DOMContentLoaded", () => {
             searchInventory(query);
         }
     });
+
+    //Item_Add Formular wird angezeigt
+    const addItemBtn = document.getElementById("addItemBtn");
+    const addItemForm = document.getElementById("addItemForm");
+
+    if (!addItemBtn || !addItemForm) return;
+
+    addItemBtn.addEventListener("click", () => {
+        if (addItemForm.style.display === "none") {
+            addItemForm.style.display = "block";
+        } else {
+            addItemForm.style.display = "none";
+        }
+    });
+
+ //Neue Item wird an Json gesendet
+
+    if (addItemForm) {
+        addItemForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const item = {
+                type: document.getElementById("itemType").value,
+                name: document.getElementById("itemName").value,
+                notes: document.getElementById("itemNotes").value
+            };
+
+            try {
+                const response = await fetch("/inventory", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(item)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Serverstatus: ${response.status}`);
+                }
+                // Inventar neu laden
+                loadInventory();
+                // Formular leeren
+                addItemForm.reset();
+                // Formular schliessen
+                addItemForm.style.display = "none";
+
+
+            } catch (err) {
+                console.error("Fehler beim Hinzufuegen des Artikels:", err);
+            }
+        });
+    }
+
+
 });

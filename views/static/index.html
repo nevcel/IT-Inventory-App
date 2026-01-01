@@ -17,6 +17,14 @@
   <div class="search-area">
     <input type="text" id="searchInput" placeholder="Artikel Name eingeben..."/>
     <button id="addItemBtn" class="btn-primary">+ Neuer Artikel</button>
+    <form id="addItemForm" class="add-item-form" style="display:none; margin-top:15px;">
+      <input type="text" id="itemType" placeholder="Typ" required />
+      <input type="text" id="itemName" placeholder="Name" required />
+
+      <textarea id="itemNotes" placeholder="Notizen"></textarea>
+      <button type="submit" class="btn-primary">Artikel speichern</button>
+    </form>
+
   </div>
 
   <section class="stats">

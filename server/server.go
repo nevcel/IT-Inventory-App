@@ -71,6 +71,8 @@ func AddItem(w http.ResponseWriter, r *http.Request) {
 	newItem.DateAdded = time.Now().Format("2006-01-02")
 	inventory.Inventory.Items = append(inventory.Inventory.Items, newItem)
 	inventory.Save()
+
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(newItem)
 }
