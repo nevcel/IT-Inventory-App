@@ -24,6 +24,11 @@ type loginRequest struct {
 	Password string `json:"password"`
 }
 
+type registerRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 // StartServer startet den HTTP-Server
 func StartServer() {
 	inventory = &controllers.InventoryController{
@@ -45,6 +50,10 @@ func StartServer() {
 	r.HandleFunc("/items/search", SearchItems).Methods("GET")
 	r.HandleFunc("/login", Login).Methods("POST")
 	r.HandleFunc("/logout", Logout).Methods("POST")
+	r.HandleFunc("/register", Register).Methods("POST")
+
+	//Test Router für Login:
+	r.HandleFunc("/me", RequireAuth(Me)).Methods("GET")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./views/static/"))))
 	r.Handle("/", http.FileServer(http.Dir("./views/static/")))
@@ -227,4 +236,119 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	})
 
 	w.WriteHeader(http.StatusNoContent)
+}
+
+// Register: Handler zum registrieren von User
+func Register(w http.ResponseWriter, r *http.Request) {
+	var req registerRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Ungueltiges JSON", http.StatusBadRequest)
+		return
+	}
+
+	if req.Username == "" || req.Password == "" {
+		http.Error(w, "Username und Passwort sind erforderlich", http.StatusBadRequest)
+		return
+	}
+
+	// Username bereits vergeben?
+	if users.FindByUsername(req.Username) != nil {
+		http.Error(w, "Username bereits vergeben", http.StatusConflict)
+		return
+	}
+
+	// Passwort hashen
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		http.Error(w, "Serverfehler", http.StatusInternalServerError)
+		return
+	}
+
+	// Neue ID bestimmen (max+1)
+	nextID := 1
+	for _, u := range users.Users {
+		if u.ID >= nextID {
+			nextID = u.ID + 1
+		}
+	}
+
+	newUser := models.User{
+		ID:           nextID,
+		Username:     req.Username,
+		PasswordHash: string(hash),
+		Role:         "user",
+	}
+
+	users.Users = append(users.Users, newUser)
+	users.Save()
+
+	w.WriteHeader(http.StatusCreated)
+}
+
+// Test Handler für Login
+func Me(w http.ResponseWriter, r *http.Request) {
+	u := GetCurrentUser(r)
+	if u == nil {
+		http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]any{
+		"id":       u.ID,
+		"username": u.Username,
+		"role":     u.Role,
+	})
+}
+
+// --- Helper ---
+
+// Helper: Current User hole
+func GetCurrentUser(r *http.Request) *models.User {
+	cookie, err := r.Cookie("session_id")
+	if err != nil {
+		return nil
+	}
+
+	userID, ok := sessions[cookie.Value]
+	if !ok {
+		return nil
+	}
+
+	// User anhand ID finden
+	for i := range users.Users {
+		if users.Users[i].ID == userID {
+			return &users.Users[i]
+		}
+	}
+
+	return nil
+}
+
+// Helper: Login erforderlich
+func RequireAuth(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		u := GetCurrentUser(r)
+		if u == nil {
+			http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+			return
+		}
+		next(w, r)
+	}
+}
+
+// Helper: Admin erforderlich
+func RequireAdmin(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		u := GetCurrentUser(r)
+		if u == nil {
+			http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+			return
+		}
+		if u.Role != "admin" {
+			http.Error(w, "Keine Berechtigung", http.StatusForbidden)
+			return
+		}
+		next(w, r)
+	}
 }

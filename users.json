@@ -10,5 +10,11 @@
     "username": "user1",
     "password_hash": "$2a$10$QsothUEo6U3NCr.qsVCOF.2.yotA9ZxI117BoMBssIoTTt/Eq8/uq",
     "role": "user"
+  },
+  {
+    "id": 3,
+    "username": "user2",
+    "password_hash": "$2a$10$vpToMMvU4EBOFXtI1JKrXOHIwf15JajbpucSwGdompumfDFupi3Ka",
+    "role": "user"
   }
 ]
