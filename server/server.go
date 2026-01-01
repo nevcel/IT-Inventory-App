@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -28,6 +29,7 @@ func StartServer() {
 	r.HandleFunc("/inventory", AddItem).Methods("POST")
 	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RemoveItem).Methods("DELETE")
+	r.HandleFunc("/items/search", SearchItems).Methods("GET")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./views/static/"))))
 	r.Handle("/", http.FileServer(http.Dir("./views/static/")))
@@ -119,4 +121,21 @@ func RemoveItem(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	http.Error(w, "Item not found", http.StatusNotFound)
+}
+
+// SearchItems sucht Atrikel in der Liste
+func SearchItems(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("q")
+	query = strings.ToLower(query)
+
+	var result []models.Item
+
+	for _, item := range inventory.Inventory.Items {
+		if strings.Contains(strings.ToLower(item.Name), query) {
+			result = append(result, item)
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(result)
 }
