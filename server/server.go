@@ -7,13 +7,22 @@ import (
 	"strings"
 	"time"
 
+	"crypto/rand"
+	"encoding/hex"
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 	"mvc-inventary/controllers"
 	"mvc-inventary/models"
 )
 
 var inventory *controllers.InventoryController
 var users *controllers.UserController
+var sessions = map[string]int{} // sessionID -> userID
+
+type loginRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
 
 // StartServer startet den HTTP-Server
 func StartServer() {
@@ -34,6 +43,8 @@ func StartServer() {
 	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RemoveItem).Methods("DELETE")
 	r.HandleFunc("/items/search", SearchItems).Methods("GET")
+	r.HandleFunc("/login", Login).Methods("POST")
+	r.HandleFunc("/logout", Logout).Methods("POST")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./views/static/"))))
 	r.Handle("/", http.FileServer(http.Dir("./views/static/")))
@@ -144,4 +155,76 @@ func SearchItems(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(result)
+}
+
+// Helper Session-ID generieren
+func newSessionID() (string, error) {
+	b := make([]byte, 32)
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(b), nil
+}
+
+// Login Handler
+func Login(w http.ResponseWriter, r *http.Request) {
+	var req loginRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Ungueltiges JSON", http.StatusBadRequest)
+		return
+	}
+
+	user := users.FindByUsername(req.Username)
+	if user == nil {
+		http.Error(w, "Login fehlgeschlagen", http.StatusUnauthorized)
+		return
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
+		http.Error(w, "Login fehlgeschlagen", http.StatusUnauthorized)
+		return
+	}
+
+	sid, err := newSessionID()
+	if err != nil {
+		http.Error(w, "Serverfehler", http.StatusInternalServerError)
+		return
+	}
+
+	sessions[sid] = user.ID
+
+	http.SetCookie(w, &http.Cookie{
+		Name:     "session_id",
+		Value:    sid,
+		Path:     "/",
+		HttpOnly: true,
+		// Secure: true, // erst aktivieren wenn HTTPS
+		SameSite: http.SameSiteLaxMode,
+	})
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]any{
+		"username": user.Username,
+		"role":     user.Role,
+	})
+}
+
+// Logout Handler
+func Logout(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("session_id")
+	if err == nil {
+		delete(sessions, cookie.Value)
+	}
+
+	http.SetCookie(w, &http.Cookie{
+		Name:     "session_id",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+	})
+
+	w.WriteHeader(http.StatusNoContent)
 }
