@@ -538,5 +538,14 @@
     "date_removed": "",
     "notes": "user2",
     "owner_id": 3
+  },
+  {
+    "id": 61,
+    "type": "Grafikkarte",
+    "name": "NVidia",
+    "date_added": "2026-01-02",
+    "date_removed": "",
+    "notes": "4060",
+    "owner_id": 3
   }
 ]

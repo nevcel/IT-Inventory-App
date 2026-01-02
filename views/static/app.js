@@ -1,4 +1,5 @@
 // app.js
+let currentUser = null;
 
 async function checkAuth() {
     const res = await fetch("/me");
@@ -27,6 +28,14 @@ async function loadInventory() {
 
         items.forEach(item => {
             const row = document.createElement("tr");
+            const canDelete =
+                currentUser &&
+                (currentUser.role === "admin" || item.owner_id === currentUser.id);
+
+            const deleteButtonHtml = canDelete
+                ? `<button class="btn-primary" data-delete-id="${item.id}">Loeschen</button>`
+                : `-`;
+
             row.innerHTML = `
         <td>${item.id}</td>
         <td>${item.type}</td>
@@ -34,6 +43,8 @@ async function loadInventory() {
         <td>${item.date_added}</td>
         <td>${item.date_removed || "-"}</td>
         <td>${item.notes || "-"}</td>
+        <td>${deleteButtonHtml}</td>
+
       `;
             tbody.appendChild(row);
         });
@@ -65,6 +76,14 @@ async function searchInventory(query) {
 
         items.forEach(item => {
             const row = document.createElement("tr");
+            const canDelete =
+                currentUser &&
+                (currentUser.role === "admin" || item.owner_id === currentUser.id);
+
+            const deleteButtonHtml = canDelete
+                ? `<button class="btn-primary" data-delete-id="${item.id}">Loeschen</button>`
+                : `-`;
+
             row.innerHTML = `
                 <td>${item.id}</td>
                 <td>${item.type}</td>
@@ -72,6 +91,8 @@ async function searchInventory(query) {
                 <td>${item.date_added}</td>
                 <td>${item.date_removed || "-"}</td>
                 <td>${item.notes || "-"}</td>
+                <td>${deleteButtonHtml}</td>
+
             `;
             tbody.appendChild(row);
         });
@@ -82,7 +103,6 @@ async function searchInventory(query) {
 }
 
 
-document.addEventListener("DOMContentLoaded", loadInventory);
 
 //Logout-Funktion
 async function doLogout() {
@@ -102,11 +122,22 @@ function showUserInfo(me) {
     }
 }
 
+async function deleteItem(id) {
+    const res = await fetch(`/inventory/${id}`, { method: "DELETE" });
+
+    if (res.ok) {
+        loadInventory();
+    } else {
+        console.error("Loeschen fehlgeschlagen:", res.status);
+    }
+}
+
 // Listener for Item-Search
 document.addEventListener("DOMContentLoaded", async () => {
     const me = await checkAuth();
     if (!me) return;
 
+    currentUser = me
     showUserInfo(me);
     loadInventory();
     // Item-Search bereich
@@ -181,7 +212,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             await doLogout();
         });
     }
-
-
+    const tableBody = document.getElementById("inventoryBody");
+    if (tableBody) {
+        tableBody.addEventListener("click", async (e) => {
+            const target = e.target;
+            if (target && target.dataset && target.dataset.deleteId) {
+                await deleteItem(target.dataset.deleteId);
+            }
+        });
+    }
 
 });
