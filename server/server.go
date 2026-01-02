@@ -46,7 +46,7 @@ func StartServer() {
 	r.HandleFunc("/inventory/{id}", GetItem).Methods("GET")
 	r.HandleFunc("/inventory", RequireAuth(AddItem)).Methods("POST")
 	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
-	r.HandleFunc("/inventory/{id}", RemoveItem).Methods("DELETE")
+	r.HandleFunc("/inventory/{id}", RequireAuth(RemoveItem)).Methods("DELETE")
 	r.HandleFunc("/items/search", SearchItems).Methods("GET")
 	r.HandleFunc("/login", Login).Methods("POST")
 	r.HandleFunc("/logout", Logout).Methods("POST")
@@ -158,20 +158,52 @@ func EditItem(w http.ResponseWriter, r *http.Request) {
 
 // RemoveItem markiert ein Item als entfernt
 func RemoveItem(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
+	// Current User holen
+	u := GetCurrentUser(r)
+	if u == nil {
+		http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+		return
+	}
 
-	for i, item := range inventory.Inventory.Items {
-		if strconv.Itoa(item.ID) == id {
-			// Entferne das Item aus der Slice
-			inventory.Inventory.Items = append(inventory.Inventory.Items[:i], inventory.Inventory.Items[i+1:]...)
-			inventory.Save()
-			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(map[string]string{"message": "Item deleted"})
-			return
+	// ID aus URL holen und parsen
+	vars := mux.Vars(r)
+	idStr := vars["id"]
+
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "Ungueltige ID", http.StatusBadRequest)
+		return
+	}
+
+	// Item suchen (Index + Item)
+	idx := -1
+	var found models.Item
+
+	for i, it := range inventory.Inventory.Items {
+		if it.ID == id {
+			idx = i
+			found = it
+			break
 		}
 	}
-	http.Error(w, "Item not found", http.StatusNotFound)
+
+	if idx == -1 {
+		http.Error(w, "Item nicht gefunden", http.StatusNotFound)
+		return
+	}
+
+	// Berechtigung pruefen
+	if u.Role != "admin" && found.OwnerID != u.ID {
+		http.Error(w, "Keine Berechtigung", http.StatusForbidden)
+		return
+	}
+
+	// Loeschen
+	inventory.Inventory.Items = append(inventory.Inventory.Items[:idx], inventory.Inventory.Items[idx+1:]...)
+	inventory.Save()
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "Item deleted"})
 }
 
 // SearchItems sucht Atrikel in der Liste

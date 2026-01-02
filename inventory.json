@@ -529,14 +529,5 @@
     "date_removed": "",
     "notes": "nur user",
     "owner_id": 3
-  },
-  {
-    "id": 60,
-    "type": "Test",
-    "name": "User Item",
-    "date_added": "2026-01-02",
-    "date_removed": "",
-    "notes": "nur user",
-    "owner_id": 1
   }
 ]
