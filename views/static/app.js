@@ -1,5 +1,14 @@
 // app.js
 
+async function checkAuth() {
+    const res = await fetch("/me");
+    if (!res.ok) {
+        window.location.href = "/login.html";
+        return null;
+    }
+    return await res.json();
+}
+
 async function loadInventory() {
     try {
         const response = await fetch("/inventory");
@@ -76,7 +85,10 @@ async function searchInventory(query) {
 document.addEventListener("DOMContentLoaded", loadInventory);
 
 // Listener for Item-Search
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    const me = await checkAuth();
+    if (!me) return;
+
     loadInventory();
     // Item-Search bereich
     const searchInput = document.getElementById("searchInput");
@@ -106,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
- //Neue Item wird an Json gesendet
+    //Neue Item wird an Json gesendet
 
     if (addItemForm) {
         addItemForm.addEventListener("submit", async function (e) {
