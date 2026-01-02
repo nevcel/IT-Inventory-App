@@ -42,9 +42,9 @@ func StartServer() {
 	r := mux.NewRouter()
 
 	// Routen definieren
-	r.HandleFunc("/inventory", GetInventory).Methods("GET")
+	r.HandleFunc("/inventory", RequireAuth(GetInventory)).Methods("GET")
 	r.HandleFunc("/inventory/{id}", GetItem).Methods("GET")
-	r.HandleFunc("/inventory", AddItem).Methods("POST")
+	r.HandleFunc("/inventory", RequireAuth(AddItem)).Methods("POST")
 	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RemoveItem).Methods("DELETE")
 	r.HandleFunc("/items/search", SearchItems).Methods("GET")
@@ -71,6 +71,24 @@ func GetInventory(w http.ResponseWriter, r *http.Request) {
 
 // GetItem gibt ein einzelnes Item zurück
 func GetItem(w http.ResponseWriter, r *http.Request) {
+	u := GetCurrentUser(r)
+	if u == nil {
+		http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+		return
+	}
+
+	items := inventory.Inventory.Items
+
+	if u.Role != "admin" {
+		filtered := []models.Item{}
+		for _, it := range items {
+			if it.OwnerID == u.ID {
+				filtered = append(filtered, it)
+			}
+		}
+		items = filtered
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	id := vars["id"]
@@ -91,6 +109,13 @@ func AddItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	u := GetCurrentUser(r)
+	if u == nil {
+		http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
+		return
+	}
+
+	newItem.OwnerID = u.ID
 	newItem.ID = len(inventory.Inventory.Items) + 1
 	newItem.DateAdded = time.Now().Format("2006-01-02")
 	inventory.Inventory.Items = append(inventory.Inventory.Items, newItem)

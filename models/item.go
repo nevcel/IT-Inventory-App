@@ -8,6 +8,7 @@ type Item struct {
 	DateAdded   string `json:"date_added"`
 	DateRemoved string `json:"date_removed"`
 	Notes       string `json:"notes"`
+	OwnerID     int    `json:"owner_id"`
 }
 
 // Inventory represents a collection of items.

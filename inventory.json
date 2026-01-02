@@ -5,7 +5,8 @@
     "name": "Bmw",
     "date_added": "2024-12-08",
     "date_removed": "",
-    "notes": "crashed"
+    "notes": "crashed",
+    "owner_id": 0
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "name": "S24",
     "date_added": "2024-12-30",
     "date_removed": "",
-    "notes": "fixed"
+    "notes": "fixed",
+    "owner_id": 0
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "name": "NVidia",
     "date_added": "2025-01-10",
     "date_removed": "",
-    "notes": "4060"
+    "notes": "4060",
+    "owner_id": 0
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "name": "Fritz-Box5000",
     "date_added": "2025-01-12",
     "date_removed": "2025-01-12",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "name": "Fritz-Box5001",
     "date_added": "2025-01-13",
     "date_removed": "",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "name": "Netgear GS108",
     "date_added": "2025-01-13",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "name": "Dell Latitude 7440",
     "date_added": "2025-01-14",
     "date_removed": "",
-    "notes": "in use"
+    "notes": "in use",
+    "owner_id": 0
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "name": "LG UltraFine 27",
     "date_added": "2025-01-14",
     "date_removed": "",
-    "notes": "good"
+    "notes": "good",
+    "owner_id": 0
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "name": "HP LaserJet 2035",
     "date_added": "2025-01-15",
     "date_removed": "",
-    "notes": "maintenance"
+    "notes": "maintenance",
+    "owner_id": 0
   },
   {
     "id": 10,
@@ -77,7 +86,8 @@
     "name": "Cisco RV340",
     "date_added": "2025-01-15",
     "date_removed": "",
-    "notes": "updated"
+    "notes": "updated",
+    "owner_id": 0
   },
   {
     "id": 11,
@@ -85,7 +95,8 @@
     "name": "Synology DS923+",
     "date_added": "2025-01-15",
     "date_removed": "",
-    "notes": "new disks"
+    "notes": "new disks",
+    "owner_id": 0
   },
   {
     "id": 12,
@@ -93,7 +104,8 @@
     "name": "HP ProLiant ML350",
     "date_added": "2025-01-16",
     "date_removed": "",
-    "notes": "backup"
+    "notes": "backup",
+    "owner_id": 0
   },
   {
     "id": 13,
@@ -101,7 +113,8 @@
     "name": "Lenovo ThinkPad X1",
     "date_added": "2025-01-16",
     "date_removed": "",
-    "notes": "assigned"
+    "notes": "assigned",
+    "owner_id": 0
   },
   {
     "id": 14,
@@ -109,7 +122,8 @@
     "name": "TP-Link TL-SG105",
     "date_added": "2025-01-17",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 15,
@@ -117,7 +131,8 @@
     "name": "Dell U2720Q",
     "date_added": "2025-01-17",
     "date_removed": "",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 16,
@@ -125,7 +140,8 @@
     "name": "HP EliteBook 850",
     "date_added": "2025-01-18",
     "date_removed": "",
-    "notes": "good"
+    "notes": "good",
+    "owner_id": 0
   },
   {
     "id": 17,
@@ -133,7 +149,8 @@
     "name": "QNAP TS-451D",
     "date_added": "2025-01-18",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 18,
@@ -141,7 +158,8 @@
     "name": "Fritz-Box5002",
     "date_added": "2025-01-19",
     "date_removed": "",
-    "notes": "testing"
+    "notes": "testing",
+    "owner_id": 0
   },
   {
     "id": 19,
@@ -149,7 +167,8 @@
     "name": "Canon Pixma G5050",
     "date_added": "2025-01-19",
     "date_removed": "",
-    "notes": "repaired"
+    "notes": "repaired",
+    "owner_id": 0
   },
   {
     "id": 20,
@@ -157,7 +176,8 @@
     "name": "Ubiquiti USW-Lite-8",
     "date_added": "2025-01-20",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 21,
@@ -165,7 +185,8 @@
     "name": "MacBook Pro 14",
     "date_added": "2025-01-20",
     "date_removed": "",
-    "notes": "assigned"
+    "notes": "assigned",
+    "owner_id": 0
   },
   {
     "id": 22,
@@ -173,7 +194,8 @@
     "name": "Dell PowerEdge R740",
     "date_added": "2025-01-21",
     "date_removed": "",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 23,
@@ -181,7 +203,8 @@
     "name": "Fritz-Box5003",
     "date_added": "2025-01-21",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 24,
@@ -189,7 +212,8 @@
     "name": "Samsung Odyssey G5",
     "date_added": "2025-01-22",
     "date_removed": "",
-    "notes": "good"
+    "notes": "good",
+    "owner_id": 0
   },
   {
     "id": 25,
@@ -197,7 +221,8 @@
     "name": "Brother HL-L8260CDW",
     "date_added": "2025-01-22",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 26,
@@ -205,7 +230,8 @@
     "name": "Synology DS220j",
     "date_added": "2025-01-23",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 27,
@@ -213,7 +239,8 @@
     "name": "Dell XPS 13",
     "date_added": "2025-01-23",
     "date_removed": "",
-    "notes": "assigned"
+    "notes": "assigned",
+    "owner_id": 0
   },
   {
     "id": 28,
@@ -221,7 +248,8 @@
     "name": "MikroTik CRS326",
     "date_added": "2025-01-24",
     "date_removed": "",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 29,
@@ -229,7 +257,8 @@
     "name": "Fritz-Box5004",
     "date_added": "2025-01-24",
     "date_removed": "",
-    "notes": "spare"
+    "notes": "spare",
+    "owner_id": 0
   },
   {
     "id": 30,
@@ -237,7 +266,8 @@
     "name": "Supermicro SYS-5019",
     "date_added": "2025-01-25",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 31,
@@ -245,7 +275,8 @@
     "name": "Epson EcoTank ET-2850",
     "date_added": "2025-01-25",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 32,
@@ -253,7 +284,8 @@
     "name": "HP ProBook 450",
     "date_added": "2025-01-26",
     "date_removed": "",
-    "notes": "good"
+    "notes": "good",
+    "owner_id": 0
   },
   {
     "id": 33,
@@ -261,7 +293,8 @@
     "name": "BenQ PD2705U",
     "date_added": "2025-01-26",
     "date_removed": "",
-    "notes": "new"
+    "notes": "new",
+    "owner_id": 0
   },
   {
     "id": 34,
@@ -269,7 +302,8 @@
     "name": "QNAP TS-230",
     "date_added": "2025-01-27",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 35,
@@ -277,7 +311,8 @@
     "name": "Cisco SG250-08",
     "date_added": "2025-01-27",
     "date_removed": "",
-    "notes": "ok"
+    "notes": "ok",
+    "owner_id": 0
   },
   {
     "id": 36,
@@ -285,7 +320,8 @@
     "name": "Fritz-Box5005",
     "date_added": "2025-01-28",
     "date_removed": "",
-    "notes": "updated"
+    "notes": "updated",
+    "owner_id": 0
   },
   {
     "id": 37,
@@ -293,7 +329,8 @@
     "name": "BMW X5",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "Test"
+    "notes": "Test",
+    "owner_id": 0
   },
   {
     "id": 38,
@@ -301,7 +338,8 @@
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "gelesen"
+    "notes": "gelesen",
+    "owner_id": 0
   },
   {
     "id": 39,
@@ -309,7 +347,8 @@
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "gelesen"
+    "notes": "gelesen",
+    "owner_id": 0
   },
   {
     "id": 40,
@@ -317,7 +356,8 @@
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "gelesen"
+    "notes": "gelesen",
+    "owner_id": 0
   },
   {
     "id": 41,
@@ -325,7 +365,8 @@
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "gelesen"
+    "notes": "gelesen",
+    "owner_id": 0
   },
   {
     "id": 42,
@@ -333,7 +374,8 @@
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "gelesen"
+    "notes": "gelesen",
+    "owner_id": 0
   },
   {
     "id": 43,
@@ -341,7 +383,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 44,
@@ -349,7 +392,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 45,
@@ -357,7 +401,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 46,
@@ -365,7 +410,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 47,
@@ -373,7 +419,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 48,
@@ -381,7 +428,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 49,
@@ -389,7 +437,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 50,
@@ -397,7 +446,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 51,
@@ -405,7 +455,8 @@
     "name": "adf",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "asdf"
+    "notes": "asdf",
+    "owner_id": 0
   },
   {
     "id": 52,
@@ -413,7 +464,8 @@
     "name": "sgh",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "sgh"
+    "notes": "sgh",
+    "owner_id": 0
   },
   {
     "id": 53,
@@ -421,7 +473,8 @@
     "name": "sgh",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "sgh"
+    "notes": "sgh",
+    "owner_id": 0
   },
   {
     "id": 54,
@@ -429,7 +482,8 @@
     "name": "sgh",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "sgh"
+    "notes": "sgh",
+    "owner_id": 0
   },
   {
     "id": 55,
@@ -437,7 +491,8 @@
     "name": "sgh",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "sgh"
+    "notes": "sgh",
+    "owner_id": 0
   },
   {
     "id": 56,
@@ -445,7 +500,8 @@
     "name": "test",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "test"
+    "notes": "test",
+    "owner_id": 0
   },
   {
     "id": 57,
@@ -453,7 +509,8 @@
     "name": "test2",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "test2"
+    "notes": "test2",
+    "owner_id": 0
   },
   {
     "id": 58,
@@ -461,6 +518,25 @@
     "name": "34",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "34"
+    "notes": "34",
+    "owner_id": 0
+  },
+  {
+    "id": 59,
+    "type": "Test",
+    "name": "User Item",
+    "date_added": "2026-01-02",
+    "date_removed": "",
+    "notes": "nur user",
+    "owner_id": 3
+  },
+  {
+    "id": 60,
+    "type": "Test",
+    "name": "User Item",
+    "date_added": "2026-01-02",
+    "date_removed": "",
+    "notes": "nur user",
+    "owner_id": 1
   }
 ]
