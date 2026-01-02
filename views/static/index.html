@@ -10,13 +10,17 @@
 <body>
 <nav class="navbar">
   <div class="logo">📦 Inventory Manager</div>
-  <button class="login-btn">Login</button>
+  <div id="userInfo" style="margin-bottom: 10px; font-weight: bold;"></div>
+  <button id="logoutBtn" class="login-btn">Logout</button>
+
+
 </nav>
 
 <main class="container">
   <div class="search-area">
     <input type="text" id="searchInput" placeholder="Artikel Name eingeben..."/>
     <button id="addItemBtn" class="btn-primary">+ Neuer Artikel</button>
+
     <form id="addItemForm" class="add-item-form" style="display:none; margin-top:15px;">
       <input type="text" id="itemType" placeholder="Typ" required />
       <input type="text" id="itemName" placeholder="Name" required />

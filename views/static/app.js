@@ -84,11 +84,30 @@ async function searchInventory(query) {
 
 document.addEventListener("DOMContentLoaded", loadInventory);
 
+//Logout-Funktion
+async function doLogout() {
+    await fetch("/logout", { method: "POST" });
+    window.location.href = "/login.html";
+}
+
+//User-Info Anzeigen
+function showUserInfo(me) {
+    const userInfo = document.getElementById("userInfo");
+    if (!userInfo || !me) return;
+
+    if (me.role === "admin") {
+        userInfo.textContent = `Eingeloggt als: ${me.username} (ADMIN)`;
+    } else {
+        userInfo.textContent = `Eingeloggt als: ${me.username}`;
+    }
+}
+
 // Listener for Item-Search
 document.addEventListener("DOMContentLoaded", async () => {
     const me = await checkAuth();
     if (!me) return;
 
+    showUserInfo(me);
     loadInventory();
     // Item-Search bereich
     const searchInput = document.getElementById("searchInput");
@@ -155,6 +174,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     }
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async () => {
+            await doLogout();
+        });
+    }
+
 
 
 });
