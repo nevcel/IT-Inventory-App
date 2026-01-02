@@ -45,7 +45,7 @@ func StartServer() {
 	r.HandleFunc("/inventory", RequireAuth(GetInventory)).Methods("GET")
 	r.HandleFunc("/inventory/{id}", GetItem).Methods("GET")
 	r.HandleFunc("/inventory", RequireAuth(AddItem)).Methods("POST")
-	r.HandleFunc("/inventory/{id}", EditItem).Methods("PUT")
+	r.HandleFunc("/inventory/{id}", RequireAuth(EditItem)).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RequireAuth(RemoveItem)).Methods("DELETE")
 	r.HandleFunc("/items/search", SearchItems).Methods("GET")
 	r.HandleFunc("/login", Login).Methods("POST")
@@ -128,17 +128,47 @@ func AddItem(w http.ResponseWriter, r *http.Request) {
 
 // EditItem bearbeitet ein bestehendes Item
 func EditItem(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
-
-	var updatedItem models.Item
-	if err := json.NewDecoder(r.Body).Decode(&updatedItem); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	// Current User holen
+	u := GetCurrentUser(r)
+	if u == nil {
+		http.Error(w, "Nicht eingeloggt", http.StatusUnauthorized)
 		return
 	}
 
+	// ID aus URL holen
+	vars := mux.Vars(r)
+	idStr := vars["id"]
+
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "Ungueltige ID", http.StatusBadRequest)
+		return
+	}
+
+	// Body lesen
+	var updatedItem models.Item
+	if err := json.NewDecoder(r.Body).Decode(&updatedItem); err != nil {
+		http.Error(w, "Ungueltiges JSON", http.StatusBadRequest)
+		return
+	}
+
+	// Item suchen
 	for i, item := range inventory.Inventory.Items {
-		if strconv.Itoa(item.ID) == id && item.DateRemoved == "" {
+		if item.ID == id {
+
+			// optional: falls du "entfernte" Items sperren willst
+			if item.DateRemoved != "" {
+				http.Error(w, "Item wurde entfernt", http.StatusNotFound)
+				return
+			}
+
+			// Berechtigung pruefen
+			if u.Role != "admin" && item.OwnerID != u.ID {
+				http.Error(w, "Keine Berechtigung", http.StatusForbidden)
+				return
+			}
+
+			// Felder nur updaten wenn gesetzt
 			if updatedItem.Type != "" {
 				inventory.Inventory.Items[i].Type = updatedItem.Type
 			}
@@ -148,12 +178,15 @@ func EditItem(w http.ResponseWriter, r *http.Request) {
 			if updatedItem.Notes != "" {
 				inventory.Inventory.Items[i].Notes = updatedItem.Notes
 			}
+
 			inventory.Save()
+			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(inventory.Inventory.Items[i])
 			return
 		}
 	}
-	http.Error(w, "Item not found or removed", http.StatusNotFound)
+
+	http.Error(w, "Item nicht gefunden", http.StatusNotFound)
 }
 
 // RemoveItem markiert ein Item als entfernt

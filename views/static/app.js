@@ -1,5 +1,7 @@
 // app.js
 let currentUser = null;
+let editItemId = null;
+
 
 async function checkAuth() {
     const res = await fetch("/me");
@@ -35,6 +37,10 @@ async function loadInventory() {
             const deleteButtonHtml = canDelete
                 ? `<button class="btn-primary" data-delete-id="${item.id}">Loeschen</button>`
                 : `-`;
+            const editButtonHtml = canDelete
+                ? `<button class="btn-primary" data-edit-id="${item.id}">Edit</button>`
+                : `-`;
+
 
             row.innerHTML = `
         <td>${item.id}</td>
@@ -43,7 +49,7 @@ async function loadInventory() {
         <td>${item.date_added}</td>
         <td>${item.date_removed || "-"}</td>
         <td>${item.notes || "-"}</td>
-        <td>${deleteButtonHtml}</td>
+        <td>${editButtonHtml} ${deleteButtonHtml}</td>
 
       `;
             tbody.appendChild(row);
@@ -83,6 +89,10 @@ async function searchInventory(query) {
             const deleteButtonHtml = canDelete
                 ? `<button class="btn-primary" data-delete-id="${item.id}">Loeschen</button>`
                 : `-`;
+            const editButtonHtml = canDelete
+                ? `<button class="btn-primary" data-edit-id="${item.id}">Edit</button>`
+                : `-`;
+
 
             row.innerHTML = `
                 <td>${item.id}</td>
@@ -91,7 +101,8 @@ async function searchInventory(query) {
                 <td>${item.date_added}</td>
                 <td>${item.date_removed || "-"}</td>
                 <td>${item.notes || "-"}</td>
-                <td>${deleteButtonHtml}</td>
+                <td>${editButtonHtml} ${deleteButtonHtml}</td>
+
 
             `;
             tbody.appendChild(row);
@@ -142,31 +153,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadInventory();
     // Item-Search bereich
     const searchInput = document.getElementById("searchInput");
-    if (!searchInput) return;
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            const query = this.value.trim();
 
-    searchInput.addEventListener("input", function () {
-        const query = this.value.trim();
+            if (query === "") {
+                loadInventory();
+            } else {
+                searchInventory(query);
+            }
+        });
+    }
 
-        if (query === "") {
-            loadInventory();
-        } else {
-            searchInventory(query);
-        }
-    });
+
 
     //Item_Add Formular wird angezeigt
     const addItemBtn = document.getElementById("addItemBtn");
     const addItemForm = document.getElementById("addItemForm");
 
-    if (!addItemBtn || !addItemForm) return;
+    if (addItemBtn && addItemForm) {
+        addItemBtn.addEventListener("click", () => {
+            if (addItemForm.style.display === "none") {
+                addItemForm.style.display = "block";
+            } else {
+                addItemForm.style.display = "none";
+            }
+        });
+    }
 
-    addItemBtn.addEventListener("click", () => {
-        if (addItemForm.style.display === "none") {
-            addItemForm.style.display = "block";
-        } else {
-            addItemForm.style.display = "none";
-        }
-    });
 
     //Neue Item wird an Json gesendet
 
@@ -180,9 +194,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 notes: document.getElementById("itemNotes").value
             };
 
+            const isEdit = editItemId !== null;
+
+            const url = isEdit ? `/inventory/${editItemId}` : "/inventory";
+            const method = isEdit ? "PUT" : "POST";
+
             try {
-                const response = await fetch("/inventory", {
-                    method: "POST",
+                const response = await fetch(url, {
+                    method: method,
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -192,6 +211,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (!response.ok) {
                     throw new Error(`Serverstatus: ${response.status}`);
                 }
+
+                editItemId = null;
+
                 // Inventar neu laden
                 loadInventory();
                 // Formular leeren
@@ -206,6 +228,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+
+
+
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", async () => {
@@ -215,9 +240,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tableBody = document.getElementById("inventoryBody");
     if (tableBody) {
         tableBody.addEventListener("click", async (e) => {
-            const target = e.target;
-            if (target && target.dataset && target.dataset.deleteId) {
-                await deleteItem(target.dataset.deleteId);
+            // sucht das naechste Element (Button) das data-delete-id oder data-edit-id hat
+            const actionBtn = e.target.closest("[data-delete-id], [data-edit-id]");
+            if (!actionBtn) return;
+
+            // LOESCHEN
+            if (actionBtn.dataset.deleteId) {
+                await deleteItem(actionBtn.dataset.deleteId);
+                return;
+            }
+
+            // EDIT
+            if (actionBtn.dataset.editId) {
+                const id = actionBtn.dataset.editId;
+
+                const res = await fetch("/inventory");
+                if (!res.ok) return;
+
+                const data = await res.json();
+                const items = Array.isArray(data) ? data : [data];
+
+                const item = items.find(x => String(x.id) === String(id));
+
+                if (!item) return;
+
+                editItemId = item.id;
+
+                const addItemForm = document.getElementById("addItemForm");
+                addItemForm.style.display = "block";
+
+                document.getElementById("itemType").value = item.type || "";
+                document.getElementById("itemName").value = item.name || "";
+                document.getElementById("itemNotes").value = item.notes || "";
             }
         });
     }

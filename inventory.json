@@ -514,38 +514,20 @@
   },
   {
     "id": 58,
-    "type": "test24",
-    "name": "34",
+    "type": "0",
+    "name": "NVidia",
     "date_added": "2026-01-01",
     "date_removed": "",
-    "notes": "34",
+    "notes": "6",
     "owner_id": 0
   },
   {
     "id": 59,
-    "type": "Test",
-    "name": "User Item",
+    "type": "Maus-Test",
+    "name": "Logitech",
     "date_added": "2026-01-02",
     "date_removed": "",
-    "notes": "nur user",
-    "owner_id": 3
-  },
-  {
-    "id": 60,
-    "type": "test3",
-    "name": "test",
-    "date_added": "2026-01-02",
-    "date_removed": "",
-    "notes": "user2",
-    "owner_id": 3
-  },
-  {
-    "id": 61,
-    "type": "Grafikkarte",
-    "name": "NVidia",
-    "date_added": "2026-01-02",
-    "date_removed": "",
-    "notes": "4060",
+    "notes": "uzun",
     "owner_id": 3
   }
 ]
