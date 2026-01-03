@@ -23,6 +23,10 @@ func (c *InventoryController) Load() {
 	if os.IsNotExist(err) {
 		return
 	}
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
 	defer func() {
 		if err := file.Close(); err != nil {
 			fmt.Println("Error closing file:", err)
@@ -32,6 +36,13 @@ func (c *InventoryController) Load() {
 	decoder := json.NewDecoder(file)
 	if err := decoder.Decode(&c.Inventory.Items); err != nil {
 		fmt.Println("Error decoding file:", err)
+	}
+
+	// Migration: falls alte Items kein date_edited haben, setze es auf date_added
+	for i := range c.Inventory.Items {
+		if c.Inventory.Items[i].DateEdited == "" {
+			c.Inventory.Items[i].DateEdited = c.Inventory.Items[i].DateAdded
+		}
 	}
 }
 
@@ -95,7 +106,7 @@ func (c *InventoryController) Edit() {
 	id, _ := strconv.Atoi(idInput)
 
 	for i, item := range c.Inventory.Items {
-		if item.ID == id && item.DateRemoved == "" {
+		if item.ID == id && item.DateEdited == "" {
 			fmt.Printf("Editing item: %d | %s | %s\n", item.ID, item.Type, item.Name)
 
 			fmt.Print("Enter new type (leave blank to keep current): ")
@@ -136,8 +147,8 @@ func (c *InventoryController) Remove() {
 	id, _ := strconv.Atoi(idInput)
 
 	for i, item := range c.Inventory.Items {
-		if item.ID == id && item.DateRemoved == "" {
-			c.Inventory.Items[i].DateRemoved = time.Now().Format("2006-01-02")
+		if item.ID == id && item.DateEdited == "" {
+			c.Inventory.Items[i].DateEdited = time.Now().Format("2006-01-02")
 			c.Save()
 			fmt.Println("Item removed successfully!")
 			return

@@ -4,7 +4,7 @@
     "type": "Auto",
     "name": "Bmw",
     "date_added": "2024-12-08",
-    "date_removed": "",
+    "date_edited": "2026-01-03",
     "notes": "crashed",
     "owner_id": 0
   },
@@ -13,7 +13,7 @@
     "type": "Smart-Phone",
     "name": "S24",
     "date_added": "2024-12-30",
-    "date_removed": "",
+    "date_edited": "2024-12-30",
     "notes": "fixed",
     "owner_id": 0
   },
@@ -22,17 +22,8 @@
     "type": "Grafikkarte",
     "name": "NVidia",
     "date_added": "2025-01-10",
-    "date_removed": "",
+    "date_edited": "2025-01-10",
     "notes": "4060",
-    "owner_id": 0
-  },
-  {
-    "id": 4,
-    "type": "Router2",
-    "name": "Fritz-Box5000",
-    "date_added": "2025-01-12",
-    "date_removed": "2025-01-12",
-    "notes": "new",
     "owner_id": 0
   },
   {
@@ -40,7 +31,7 @@
     "type": "Router",
     "name": "Fritz-Box5001",
     "date_added": "2025-01-13",
-    "date_removed": "",
+    "date_edited": "2025-01-13",
     "notes": "new",
     "owner_id": 0
   },
@@ -49,7 +40,7 @@
     "type": "Switch",
     "name": "Netgear GS108",
     "date_added": "2025-01-13",
-    "date_removed": "",
+    "date_edited": "2025-01-13",
     "notes": "ok",
     "owner_id": 0
   },
@@ -58,7 +49,7 @@
     "type": "Laptop",
     "name": "Dell Latitude 7440",
     "date_added": "2025-01-14",
-    "date_removed": "",
+    "date_edited": "2025-01-14",
     "notes": "in use",
     "owner_id": 0
   },
@@ -67,7 +58,7 @@
     "type": "Monitor",
     "name": "LG UltraFine 27",
     "date_added": "2025-01-14",
-    "date_removed": "",
+    "date_edited": "2025-01-14",
     "notes": "good",
     "owner_id": 0
   },
@@ -76,7 +67,7 @@
     "type": "Printer",
     "name": "HP LaserJet 2035",
     "date_added": "2025-01-15",
-    "date_removed": "",
+    "date_edited": "2025-01-15",
     "notes": "maintenance",
     "owner_id": 0
   },
@@ -85,7 +76,7 @@
     "type": "Router",
     "name": "Cisco RV340",
     "date_added": "2025-01-15",
-    "date_removed": "",
+    "date_edited": "2025-01-15",
     "notes": "updated",
     "owner_id": 0
   },
@@ -94,7 +85,7 @@
     "type": "NAS",
     "name": "Synology DS923+",
     "date_added": "2025-01-15",
-    "date_removed": "",
+    "date_edited": "2025-01-15",
     "notes": "new disks",
     "owner_id": 0
   },
@@ -103,7 +94,7 @@
     "type": "Server",
     "name": "HP ProLiant ML350",
     "date_added": "2025-01-16",
-    "date_removed": "",
+    "date_edited": "2025-01-16",
     "notes": "backup",
     "owner_id": 0
   },
@@ -112,7 +103,7 @@
     "type": "Laptop",
     "name": "Lenovo ThinkPad X1",
     "date_added": "2025-01-16",
-    "date_removed": "",
+    "date_edited": "2025-01-16",
     "notes": "assigned",
     "owner_id": 0
   },
@@ -121,7 +112,7 @@
     "type": "Switch",
     "name": "TP-Link TL-SG105",
     "date_added": "2025-01-17",
-    "date_removed": "",
+    "date_edited": "2025-01-17",
     "notes": "ok",
     "owner_id": 0
   },
@@ -130,7 +121,7 @@
     "type": "Monitor",
     "name": "Dell U2720Q",
     "date_added": "2025-01-17",
-    "date_removed": "",
+    "date_edited": "2025-01-17",
     "notes": "new",
     "owner_id": 0
   },
@@ -139,7 +130,7 @@
     "type": "Laptop",
     "name": "HP EliteBook 850",
     "date_added": "2025-01-18",
-    "date_removed": "",
+    "date_edited": "2025-01-18",
     "notes": "good",
     "owner_id": 0
   },
@@ -148,7 +139,7 @@
     "type": "NAS",
     "name": "QNAP TS-451D",
     "date_added": "2025-01-18",
-    "date_removed": "",
+    "date_edited": "2025-01-18",
     "notes": "ok",
     "owner_id": 0
   },
@@ -157,7 +148,7 @@
     "type": "Router",
     "name": "Fritz-Box5002",
     "date_added": "2025-01-19",
-    "date_removed": "",
+    "date_edited": "2025-01-19",
     "notes": "testing",
     "owner_id": 0
   },
@@ -166,7 +157,7 @@
     "type": "Printer",
     "name": "Canon Pixma G5050",
     "date_added": "2025-01-19",
-    "date_removed": "",
+    "date_edited": "2025-01-19",
     "notes": "repaired",
     "owner_id": 0
   },
@@ -175,7 +166,7 @@
     "type": "Switch",
     "name": "Ubiquiti USW-Lite-8",
     "date_added": "2025-01-20",
-    "date_removed": "",
+    "date_edited": "2025-01-20",
     "notes": "ok",
     "owner_id": 0
   },
@@ -184,7 +175,7 @@
     "type": "Laptop",
     "name": "MacBook Pro 14",
     "date_added": "2025-01-20",
-    "date_removed": "",
+    "date_edited": "2025-01-20",
     "notes": "assigned",
     "owner_id": 0
   },
@@ -193,7 +184,7 @@
     "type": "Server",
     "name": "Dell PowerEdge R740",
     "date_added": "2025-01-21",
-    "date_removed": "",
+    "date_edited": "2025-01-21",
     "notes": "new",
     "owner_id": 0
   },
@@ -202,7 +193,7 @@
     "type": "Router",
     "name": "Fritz-Box5003",
     "date_added": "2025-01-21",
-    "date_removed": "",
+    "date_edited": "2025-01-21",
     "notes": "ok",
     "owner_id": 0
   },
@@ -211,7 +202,7 @@
     "type": "Monitor",
     "name": "Samsung Odyssey G5",
     "date_added": "2025-01-22",
-    "date_removed": "",
+    "date_edited": "2025-01-22",
     "notes": "good",
     "owner_id": 0
   },
@@ -220,7 +211,7 @@
     "type": "Printer",
     "name": "Brother HL-L8260CDW",
     "date_added": "2025-01-22",
-    "date_removed": "",
+    "date_edited": "2025-01-22",
     "notes": "ok",
     "owner_id": 0
   },
@@ -229,7 +220,7 @@
     "type": "NAS",
     "name": "Synology DS220j",
     "date_added": "2025-01-23",
-    "date_removed": "",
+    "date_edited": "2025-01-23",
     "notes": "ok",
     "owner_id": 0
   },
@@ -238,7 +229,7 @@
     "type": "Laptop",
     "name": "Dell XPS 13",
     "date_added": "2025-01-23",
-    "date_removed": "",
+    "date_edited": "2025-01-23",
     "notes": "assigned",
     "owner_id": 0
   },
@@ -247,7 +238,7 @@
     "type": "Switch",
     "name": "MikroTik CRS326",
     "date_added": "2025-01-24",
-    "date_removed": "",
+    "date_edited": "2025-01-24",
     "notes": "new",
     "owner_id": 0
   },
@@ -256,7 +247,7 @@
     "type": "Router",
     "name": "Fritz-Box5004",
     "date_added": "2025-01-24",
-    "date_removed": "",
+    "date_edited": "2025-01-24",
     "notes": "spare",
     "owner_id": 0
   },
@@ -265,7 +256,7 @@
     "type": "Server",
     "name": "Supermicro SYS-5019",
     "date_added": "2025-01-25",
-    "date_removed": "",
+    "date_edited": "2025-01-25",
     "notes": "ok",
     "owner_id": 0
   },
@@ -274,7 +265,7 @@
     "type": "Printer",
     "name": "Epson EcoTank ET-2850",
     "date_added": "2025-01-25",
-    "date_removed": "",
+    "date_edited": "2025-01-25",
     "notes": "ok",
     "owner_id": 0
   },
@@ -283,7 +274,7 @@
     "type": "Laptop",
     "name": "HP ProBook 450",
     "date_added": "2025-01-26",
-    "date_removed": "",
+    "date_edited": "2025-01-26",
     "notes": "good",
     "owner_id": 0
   },
@@ -292,7 +283,7 @@
     "type": "Monitor",
     "name": "BenQ PD2705U",
     "date_added": "2025-01-26",
-    "date_removed": "",
+    "date_edited": "2025-01-26",
     "notes": "new",
     "owner_id": 0
   },
@@ -301,7 +292,7 @@
     "type": "NAS",
     "name": "QNAP TS-230",
     "date_added": "2025-01-27",
-    "date_removed": "",
+    "date_edited": "2025-01-27",
     "notes": "ok",
     "owner_id": 0
   },
@@ -310,7 +301,7 @@
     "type": "Switch",
     "name": "Cisco SG250-08",
     "date_added": "2025-01-27",
-    "date_removed": "",
+    "date_edited": "2025-01-27",
     "notes": "ok",
     "owner_id": 0
   },
@@ -319,7 +310,7 @@
     "type": "Router",
     "name": "Fritz-Box5005",
     "date_added": "2025-01-28",
-    "date_removed": "",
+    "date_edited": "2025-01-28",
     "notes": "updated",
     "owner_id": 0
   },
@@ -328,7 +319,7 @@
     "type": "Auto",
     "name": "BMW X5",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "Test",
     "owner_id": 0
   },
@@ -337,7 +328,7 @@
     "type": "Buch",
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "gelesen",
     "owner_id": 0
   },
@@ -346,7 +337,7 @@
     "type": "Buch",
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "gelesen",
     "owner_id": 0
   },
@@ -355,7 +346,7 @@
     "type": "Buch",
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "gelesen",
     "owner_id": 0
   },
@@ -364,16 +355,7 @@
     "type": "Buch",
     "name": "1000 und 1 Nacht",
     "date_added": "2026-01-01",
-    "date_removed": "",
-    "notes": "gelesen",
-    "owner_id": 0
-  },
-  {
-    "id": 42,
-    "type": "Buch",
-    "name": "1000 und 1 Nacht",
-    "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "gelesen",
     "owner_id": 0
   },
@@ -382,7 +364,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -391,7 +373,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -400,7 +382,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -409,7 +391,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -418,7 +400,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -427,7 +409,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -436,7 +418,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -445,7 +427,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -454,7 +436,7 @@
     "type": "adsf",
     "name": "adf",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "asdf",
     "owner_id": 0
   },
@@ -463,7 +445,7 @@
     "type": "fgh",
     "name": "sgh",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "sgh",
     "owner_id": 0
   },
@@ -472,7 +454,7 @@
     "type": "fgh",
     "name": "sgh",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "sgh",
     "owner_id": 0
   },
@@ -481,7 +463,7 @@
     "type": "fgh",
     "name": "sgh",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "sgh",
     "owner_id": 0
   },
@@ -490,7 +472,7 @@
     "type": "fgh",
     "name": "sgh",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "sgh",
     "owner_id": 0
   },
@@ -499,7 +481,7 @@
     "type": "test",
     "name": "test",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "test",
     "owner_id": 0
   },
@@ -508,7 +490,7 @@
     "type": "test2",
     "name": "test2",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "test2",
     "owner_id": 0
   },
@@ -517,17 +499,26 @@
     "type": "0",
     "name": "NVidia",
     "date_added": "2026-01-01",
-    "date_removed": "",
+    "date_edited": "2026-01-01",
     "notes": "6",
     "owner_id": 0
   },
   {
     "id": 59,
     "type": "Maus-Test",
+    "name": "sgh",
+    "date_added": "2026-01-03",
+    "date_edited": "2026-01-03",
+    "notes": "dads",
+    "owner_id": 1
+  },
+  {
+    "id": 59,
+    "type": "Maus-Test",
     "name": "Logitech",
-    "date_added": "2026-01-02",
-    "date_removed": "",
-    "notes": "uzun",
+    "date_added": "2026-01-03",
+    "date_edited": "2026-01-03",
+    "notes": "asdf",
     "owner_id": 3
   }
 ]

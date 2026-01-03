@@ -47,7 +47,7 @@ async function loadInventory() {
         <td>${item.type}</td>
         <td>${item.name}</td>
         <td>${item.date_added}</td>
-        <td>${item.date_removed || "-"}</td>
+        <td>${item.date_edited || "-"}</td>
         <td>${item.notes || "-"}</td>
         <td>${editButtonHtml} ${deleteButtonHtml}</td>
 
@@ -99,7 +99,7 @@ async function searchInventory(query) {
                 <td>${item.type}</td>
                 <td>${item.name}</td>
                 <td>${item.date_added}</td>
-                <td>${item.date_removed || "-"}</td>
+                <td>${item.date_edited || "-"}</td>
                 <td>${item.notes || "-"}</td>
                 <td>${editButtonHtml} ${deleteButtonHtml}</td>
 

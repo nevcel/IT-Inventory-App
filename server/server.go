@@ -43,7 +43,7 @@ func StartServer() {
 
 	// Routen definieren
 	r.HandleFunc("/inventory", RequireAuth(GetInventory)).Methods("GET")
-	r.HandleFunc("/inventory/{id}", GetItem).Methods("GET")
+	r.HandleFunc("/inventory/{id}", RequireAuth(GetItem)).Methods("GET")
 	r.HandleFunc("/inventory", RequireAuth(AddItem)).Methods("POST")
 	r.HandleFunc("/inventory/{id}", RequireAuth(EditItem)).Methods("PUT")
 	r.HandleFunc("/inventory/{id}", RequireAuth(RemoveItem)).Methods("DELETE")
@@ -118,6 +118,7 @@ func AddItem(w http.ResponseWriter, r *http.Request) {
 	newItem.OwnerID = u.ID
 	newItem.ID = len(inventory.Inventory.Items) + 1
 	newItem.DateAdded = time.Now().Format("2006-01-02")
+	newItem.DateEdited = newItem.DateAdded
 	inventory.Inventory.Items = append(inventory.Inventory.Items, newItem)
 	inventory.Save()
 
@@ -145,41 +146,41 @@ func EditItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Body lesen
-	var updatedItem models.Item
-	if err := json.NewDecoder(r.Body).Decode(&updatedItem); err != nil {
+	// Body einlesen (nur Felder, die editierbar sind)
+	type updateRequest struct {
+		Type  string `json:"type"`
+		Name  string `json:"name"`
+		Notes string `json:"notes"`
+	}
+
+	var req updateRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Ungueltiges JSON", http.StatusBadRequest)
 		return
 	}
 
 	// Item suchen
-	for i, item := range inventory.Inventory.Items {
-		if item.ID == id {
+	for i := range inventory.Inventory.Items {
+		if inventory.Inventory.Items[i].ID == id {
 
-			// optional: falls du "entfernte" Items sperren willst
-			if item.DateRemoved != "" {
-				http.Error(w, "Item wurde entfernt", http.StatusNotFound)
-				return
-			}
-
-			// Berechtigung pruefen
-			if u.Role != "admin" && item.OwnerID != u.ID {
+			// Berechtigung pruefen: Admin darf alles, User nur eigene Items
+			if u.Role != "admin" && inventory.Inventory.Items[i].OwnerID != u.ID {
 				http.Error(w, "Keine Berechtigung", http.StatusForbidden)
 				return
 			}
 
-			// Felder nur updaten wenn gesetzt
-			if updatedItem.Type != "" {
-				inventory.Inventory.Items[i].Type = updatedItem.Type
-			}
-			if updatedItem.Name != "" {
-				inventory.Inventory.Items[i].Name = updatedItem.Name
-			}
-			if updatedItem.Notes != "" {
-				inventory.Inventory.Items[i].Notes = updatedItem.Notes
-			}
+			// Felder aktualisieren
+			inventory.Inventory.Items[i].Type = req.Type
+			inventory.Inventory.Items[i].Name = req.Name
+			inventory.Inventory.Items[i].Notes = req.Notes
 
+			// date_edited setzen
+			inventory.Inventory.Items[i].DateEdited = time.Now().Format("2006-01-02")
+
+			// Speichern
 			inventory.Save()
+
+			// Antwort
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(inventory.Inventory.Items[i])
 			return

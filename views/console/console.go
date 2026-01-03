@@ -13,7 +13,7 @@ func ShowInventory(inv *controllers.InventoryController) {
 	fmt.Println("\nCurrent Inventory:")
 	fmt.Println("ID  | Type            | Name            | Date Added      | Notes")
 	for _, item := range inv.Inventory.Items {
-		if item.DateRemoved == "" {
+		if item.DateEdited == "" {
 			fmt.Printf("%-3d | %-15s | %-15s | %-15s | %-15s\n", item.ID, item.Type, item.Name, item.DateAdded, item.Notes)
 		}
 	}
