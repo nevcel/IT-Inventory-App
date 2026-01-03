@@ -490,8 +490,8 @@
     "type": "test2",
     "name": "test2",
     "date_added": "2026-01-01",
-    "date_edited": "2026-01-01",
-    "notes": "test2",
+    "date_edited": "2026-01-03",
+    "notes": "test",
     "owner_id": 0
   },
   {
@@ -504,21 +504,21 @@
     "owner_id": 0
   },
   {
-    "id": 59,
-    "type": "Maus-Test",
-    "name": "sgh",
+    "id": 57,
+    "type": "Heut",
+    "name": "Hinzufügen ",
     "date_added": "2026-01-03",
     "date_edited": "2026-01-03",
-    "notes": "dads",
+    "notes": "test",
     "owner_id": 1
   },
   {
-    "id": 59,
+    "id": 58,
     "type": "Maus-Test",
     "name": "Logitech",
     "date_added": "2026-01-03",
     "date_edited": "2026-01-03",
-    "notes": "asdf",
-    "owner_id": 3
+    "notes": "User3",
+    "owner_id": 5
   }
 ]

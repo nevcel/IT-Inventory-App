@@ -2,6 +2,13 @@
 let currentUser = null;
 let editItemId = null;
 
+function getTodayLocalISO() {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+}
 
 async function checkAuth() {
     const res = await fetch("/me");
@@ -60,6 +67,27 @@ async function loadInventory() {
         if (totalItemsElement) {
             totalItemsElement.textContent = items.length;
         }
+
+        // Erweiterung: Verschiedene Types anzeigen
+        const totalTypesElement = document.getElementById("totalTypes");
+        if (totalTypesElement) {
+            const typesSet = new Set(
+                items
+                    .map(x => (x.type || "").trim().toLowerCase())
+                    .filter(x => x !== "")
+            );
+            totalTypesElement.textContent = typesSet.size;
+        }
+
+        // Erweiterung: Heute hinzugefügt anzeigen
+        const todayAddedElement = document.getElementById("todayAdded");
+        if (todayAddedElement) {
+            const today = getTodayLocalISO();
+            const countToday = items.filter(x => x.date_added === today).length;
+            todayAddedElement.textContent = countToday;
+        }
+
+
 
     } catch (err) {
         console.error("Fehler beim Laden des Inventars:", err);

@@ -22,5 +22,11 @@
     "username": "user4",
     "password_hash": "$2a$10$PXR8zS4iX.S.7gqdIefIrOm5jU69LhuQzKNJLGKwqbQo.3g4INRKq",
     "role": "user"
+  },
+  {
+    "id": 5,
+    "username": "user3",
+    "password_hash": "$2a$10$TUMfe0FUzBDDAO6dhRote.bJAAN.W0E1Wxs0hiVXscMfG583vbkkS",
+    "role": "user"
   }
 ]
