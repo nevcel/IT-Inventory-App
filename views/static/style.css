@@ -1,3 +1,5 @@
+
+
 /* === Grundlayout === */
 body {
   margin: 0;
@@ -125,3 +127,39 @@ body {
 .action-btn.delete {
   background: #ffe0e0;
 }
+
+.add-item-form {
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: whitesmoke;
+  padding: 30px;
+  border-radius: 20px;
+
+  width: 400px;
+  max-width: 90%;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+
+  background: #8e0a0a;
+  border: none;
+  border-radius: 0.2em;
+  color:whitesmoke;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+

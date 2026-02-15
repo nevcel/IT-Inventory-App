@@ -96,6 +96,8 @@ async function loadInventory() {
     }
 }
 
+
+
 // Item search by Name
 async function searchInventory(query) {
     try {
@@ -140,6 +142,7 @@ async function searchInventory(query) {
         console.error("Fehler bei der Suche:", err);
     }
 }
+
 
 
 
@@ -256,9 +259,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-
-
-
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", async () => {
@@ -303,5 +303,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     }
-
 });
+
+function closeForm() {
+    document.getElementById("addItemForm").style.display = "none";
+}
