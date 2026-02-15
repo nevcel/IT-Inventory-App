@@ -3,3 +3,7 @@
 
 # Ignore Scratches and Consoles
 .idea/scratches/
+
+inventory.json
+
+users.json
